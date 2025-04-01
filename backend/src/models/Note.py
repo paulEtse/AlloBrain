@@ -6,13 +6,22 @@ import hashlib
 from bson import ObjectId
 from pydantic import BaseModel, BeforeValidator, Field
 
+import pymongo
+from ..config import conf
 
-from models.NoteEntry import NoteEntry
-
-from config import db
-
+from .NoteEntry import NoteEntry
 
 PyObjectId = Annotated[str, BeforeValidator(str)]
+
+
+def get_db():
+    """
+    Get the database connection.
+    """
+    print("Using real db")
+    CLIENT = pymongo.MongoClient(conf["DB_CONNEXION_STRING"])
+    db = CLIENT[conf["DATABASE"]]
+    return db
 
 
 class Note(BaseModel):
@@ -75,6 +84,8 @@ class Note(BaseModel):
         """
         Save the note to the database.
         """
+        db = get_db()
+
         result = db.note.update_one(
             {"_id": ObjectId(self.id)},
             {

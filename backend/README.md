@@ -37,4 +37,6 @@ flake8 .
 Launch tests
 ```
 pytest test
+
+https://pratheekms.hashnode.dev/test-your-fastapi-api-with-pytest
 ```

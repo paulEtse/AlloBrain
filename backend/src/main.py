@@ -3,9 +3,10 @@ from datetime import datetime
 from bson import ObjectId
 from fastapi import FastAPI, HTTPException
 
-from config import db
-from models.Note import Note
-from models.schemas import AddNote, UpdateNote
+from .config import get_db
+
+from .models.Note import Note
+from .models.schemas import AddNote, UpdateNote
 
 app = FastAPI()
 
@@ -22,6 +23,7 @@ async def get_note(limit: int = 10, offset: int = 0):
     Get a list of notes from the database.
     """
     logging.info("Get note")
+    db = get_db()
     return list(db.note.find({}).skip(offset).limit(limit))
 
 
@@ -44,6 +46,7 @@ async def search_note(title: str, limit: int = 10, offset: int = 0):
     Search for notes by title.
     """
     logging.info("Search note")
+    db = get_db()
     return list(
         db.note.find({"title": {"$regex": title, "$options": "i"}})
         .skip(offset)
@@ -57,6 +60,7 @@ async def get_note_by_id(id: str):
     Get a note by its ID.
     """
     logging.info("Get note by ID")
+    db = get_db()
     note = db.note.find_one({"_id": ObjectId(id)})
     if note is None:
         raise HTTPException(status_code=404, detail="Note not found")
@@ -69,6 +73,7 @@ async def update_note(id: str, update_note: UpdateNote):
     Update a note by its ID.
     """
     logging.info("Update note")
+    db = get_db()
     note = db.note.find_one({"_id": ObjectId(id)})
     if note is None:
         raise HTTPException(status_code=404, detail="Note not found")
@@ -83,7 +88,7 @@ async def delete_note(id: str):
     Delete a note by its ID.
     """
     logging.info("Delete note")
-
+    db = get_db()
     note = db.note.find_one({"_id": ObjectId(id)})
     if note is None:
         raise HTTPException(status_code=404, detail="Note not found")
@@ -94,6 +99,7 @@ async def delete_note(id: str):
         }
     )
     db.note.delete_one({"_id": ObjectId(id)})
+    return {"message": "Note deleted successfully"}
 
 
 @app.post("/note/{id}/{sha1}", response_model=Note)
@@ -102,6 +108,7 @@ async def gotback_to_sha1(id: str, sha1: str):
     Go back to a specific SHA1 of a note.
     """
     logging.info("Go back to SHA1")
+    db = get_db()
     note = db.note.find_one({"_id": ObjectId(id)})
     if note is None:
         raise HTTPException(status_code=404, detail="Note not found")
