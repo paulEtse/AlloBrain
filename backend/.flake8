@@ -1,0 +1,27 @@
+[flake8]
+extend-ignore =
+    # E265: block comment should start with '# '
+    E265,
+    # E266: too many leading '#' for block comment
+    E266,
+    # E203: whitespace before ':'
+    E203,
+    # E501: line too long (already defined in black)
+    E501,
+    # W503: line break before binary operator
+    W503,
+    # W605: invalid escape sequence
+    W605
+    # D210: no whitespaces allowed surrounding docstring text
+    D210,
+    # D212: multi-line docstring summary should start at the first line
+    D212,
+    # C901: function is too complex
+    C901, 
+max-line-length = 88
+exclude =
+    .git
+    venv
+
+verbose = 1
+statistics = True
