@@ -7,6 +7,9 @@ npm i
 
 ### Run
 - Update backend URL in .env file
-- RUN `npm run dev`
+```sh
+npm run dev
+```
 
-[http://localhost:6173/](http://localhost:6173/)
+The app must be running at
+[http://localhost:7173/](http://localhost:7173/)
