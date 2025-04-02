@@ -3,7 +3,7 @@ FROM python:3.9
 
 WORKDIR /app
 COPY ./ /.
-RUN pip install --no-cache-dir --upgrade -r ./requirements.txt -r ./requirements_dev.txt
+RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt -r /app/requirements_dev.txt
 
 EXPOSE 7000
 
