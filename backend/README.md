@@ -21,9 +21,9 @@ pip install -r requirements.txt
 
 ## Run
 ```
-uvicorn src.main:app --host 0.0.0.0 --port 7000 --workers 1 --reload
+uvicorn src.main:app --host 0.0.0.0 --port 6173 --workers 1 --reload
 ```
-API documentation  at [http://127.0.0.1:7000/docs](http://127.0.0.1:8000/docs)
+API documentation  at [http://127.0.0.1:6173/docs](http://127.0.0.1:6173/docs)
 
 ## Lint
 To sort imports, format and lint files, run these commands:

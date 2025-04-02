@@ -28,11 +28,15 @@ To start all services, run:
 docker-compose up -d --build
 ```
 Your application should now be up and running! 🎉
-- **Frontend**: [http://localhost:5173](http://localhost:5173)
-- **Backend API**: [http://localhost:7000](http://localhost:7000)
+- **Frontend**: [http://localhost:7173](http://localhost:7173)
+- **Backend API**: [http://localhost:6173](http://localhost:6173)
 - **Mongo Express**: [http://localhost:8081](http://localhost:8081)
 
-The swagger of backend is accessible via [http://localhost:7000/docs](http://localhost:7000/docs)
+The swagger of backend is accessible via [http://localhost:6173/docs](http://localhost:6173/docs)
+
+### 4. Trouble shoot port problems
+If you having problems using a particular port, you can change it. 
+Match correctly port values in .env file, Dockerfile and docker-compose.yml file
 
 
 ## Further infomation

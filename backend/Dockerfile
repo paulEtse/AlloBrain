@@ -2,9 +2,9 @@
 FROM python:3.9
 
 WORKDIR /app
-COPY ./ /.
+COPY ./ /app
 RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt -r /app/requirements_dev.txt
 
-EXPOSE 7000
+EXPOSE 6173
 
-CMD ["uvicorn", "src.main:app", "--port", "7000", "--host", "0.0.0.0"]
+CMD ["uvicorn", "src.main:app", "--port", "6173", "--host", "0.0.0.0"]

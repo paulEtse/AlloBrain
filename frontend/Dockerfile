@@ -4,6 +4,6 @@ WORKDIR /app
 COPY . .
 RUN npm install
 
-EXPOSE 5173
+EXPOSE 7173
 
-CMD ["npm", "run", "dev", "--", "--host"]
+CMD ["npm", "run", "dev", "--", "--host", "--port", "7173"]

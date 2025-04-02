@@ -29,7 +29,7 @@ services:
   notes_backend:
     build: ./backend
     ports:
-      - "7000:7000"
+      - "6173:6173"
     environment:
       - DB_CONNEXION_STRING=mongodb://admin:password@mongodb:27017
       - DATABASE=AlloBrain
@@ -39,7 +39,7 @@ services:
   notes_frontend:
     build: ./frontend
     ports:
-      - "5173:5173"
+      - "7173:7173"
     depends_on:
       - notes_backend
 
