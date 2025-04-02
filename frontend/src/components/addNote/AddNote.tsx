@@ -65,6 +65,7 @@ const AddNote = ({ open, setOpen }: AddNoteProps) => {
                   setErrorText("");
                 }
               }}
+              inputProps={{ maxLength: 256 }}
             />
           </div>
 

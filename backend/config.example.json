@@ -1,4 +1,0 @@
-{
-  "DB_CONNEXION_STRING": "mongodb+srv://username:password@mongodbserver.com",
-  "DATABASE": "Database Name"
-}

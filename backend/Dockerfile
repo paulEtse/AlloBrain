@@ -1,18 +1,10 @@
 
 FROM python:3.9
 
+WORKDIR /app
+COPY ./ /.
+RUN pip install --no-cache-dir --upgrade -r ./requirements.txt -r ./requirements_dev.txt
 
-WORKDIR /code
+EXPOSE 7000
 
-
-COPY ./requirements.txt /code/requirements.txt
-COPY ./requirements_dev.txt /code/requirements_dev.txt
-
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt -r /code/requirements_dev.txt
-
-
-COPY ./ /code/app
-
-EXPOSE 8005
-
-CMD ["uvicorn", "app.src.main:app", "--port", "8005", "--host", "0.0.0.0"]
+CMD ["uvicorn", "src.main:app", "--port", "7000", "--host", "0.0.0.0"]

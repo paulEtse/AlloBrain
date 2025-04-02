@@ -14,11 +14,10 @@ def test_home():
     assert response.json()["message"] == "Hello World"
 
 
-def test_getnotes(mongo_mock):
+def test_get_notes(mongo_mock):
     response = client.get("/note")
     assert response.status_code == 200
-    assert isinstance(response.json(), list)
-    notes = response.json()
+    notes = response.json().get("notes")
     assert len(notes) == 1
     assert notes[0]["_id"] == FIRST_TEST_NOTE["_id"].__str__()
     assert notes[0]["title"] == FIRST_TEST_NOTE["title"]
@@ -50,8 +49,7 @@ def test_create_note(mongo_mock):
 def test_search_note(mongo_mock):
     response = client.get("/note/search/Test")
     assert response.status_code == 200
-    assert isinstance(response.json(), list)
-    notes = response.json()
+    notes = response.json().get("notes")
     assert len(notes) == 1
     assert notes[0]["title"] == "Test Note"
 
@@ -84,7 +82,8 @@ def test_delete_note(mongo_mock):
 def gotback_to_sha1(mongo_mock):
     entry = FIRST_TEST_NOTE["items"][0]
     firts_content_sha1 = hashlib.sha1(entry.content.encode()).hexdigest()
-    response = client.get(f"/note/67ebbe31e2a27ddd8b6b21ad/{firts_content_sha1}")
+    response = client.get(
+        f"/note/67ebbe31e2a27ddd8b6b21ad/{firts_content_sha1}")
     assert response.status_code == 200
     assert response.json()["items"][0]["content"] == entry.content
     assert len(response.json()["items"]) == 1

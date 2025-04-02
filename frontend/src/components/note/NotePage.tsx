@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
 import fetchNote from "../../api/fetchNote";
+import { ellipsis } from "../../api/util";
 import NoteHistory from "../noteHistory/NoteHistory";
 import Loader from "../share/loader/Loader";
 import Navigation from "../share/navigation/Navigation";
@@ -31,11 +32,11 @@ const NotePage = () => {
       <Navigation
         parts={[
           { name: "Notes", link: "/" },
-          { name: note.title, link: `/note/${noteId}` },
+          { name: ellipsis(note.title, 20), link: `/note/${noteId}` },
         ]}
       />
       <div>
-        <h1>{note.title}</h1>
+        <h1 style={{ wordWrap: "break-word" }}>{note.title}</h1>
         <EditNote note={note} key={note.items[note.items.length - 1].sha1} />
       </div>
 

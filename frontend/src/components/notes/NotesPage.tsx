@@ -67,19 +67,14 @@ const NotesPage = () => {
                 ))}
                 {notes?.notes?.length === 0 && (
                   <div className={classes.noNotes}>
-                    <h1>No notes found</h1>
+                    <p>
+                      No notes found <br />
+                      You can create one by clicking the button above
+                    </p>
                   </div>
                 )}
               </div>
             </>
-          )}
-
-          {notes?.notes?.length === 0 && (
-            <div className={classes.noNotes}>
-              <h1>
-                No notes found you can create one by clicking the button above
-              </h1>
-            </div>
           )}
         </>
       )}

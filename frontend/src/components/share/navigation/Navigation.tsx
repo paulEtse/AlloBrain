@@ -15,8 +15,9 @@ const Navigation = ({ parts }: { parts: NavigationProps }) => {
       {parts.slice(0, -1).map((part) => (
         <>
           <NavLink key={part.link} to={part.link}>
-            {part.name}/{" "}
-          </NavLink>
+            {part.name}
+          </NavLink>{" "}
+          /{" "}
         </>
       ))}
       <span className="text-gray-500"> {lastPart.name}</span>

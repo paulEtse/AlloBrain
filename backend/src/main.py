@@ -2,13 +2,22 @@ import logging
 from datetime import datetime
 from bson import ObjectId
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 
 from .config import get_db
 
 from .models.Note import Note
-from .models.schemas import AddNote, UpdateNote
+from .models.schemas import AddNote, NotesResponseModel, UpdateNote
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins (change this for security)
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all HTTP methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 
 @app.get("/")
@@ -17,14 +26,38 @@ async def root():
     return {"message": "Hello World"}
 
 
-@app.get("/note", response_model=list[Note])
-async def get_note(limit: int = 10, offset: int = 0):
+@app.get("/note", response_model=NotesResponseModel)
+async def get_note(limit: int = 9, page: int = 1):
     """
     Get a list of notes from the database.
     """
     logging.info("Get note")
     db = get_db()
-    return list(db.note.find({}).skip(offset).limit(limit))
+    response = list(db.note.aggregate([{
+        "$sort": {
+            "updated_at": -1,
+        }},
+        {
+
+            "$facet": {
+                "notes": [
+                    {"$skip": (limit * (page - 1))},
+                    {"$limit": limit},
+                ],
+                "count": [
+                    {"$count": "total"},
+                ],
+            }}
+    ]))
+    if not response or len(response[0]["count"]) == 0:
+        return {
+            "notes": [],
+            "total": 0,
+        }
+    return {
+        "notes": response[0]["notes"],
+        "total": response[0]["count"][0]["total"],
+    }
 
 
 @app.post("/note", response_model=Note)
@@ -40,18 +73,38 @@ async def create_note(new_note: AddNote):
     return note.save()
 
 
-@app.get("/note/search/{title}", response_model=list[Note])
-async def search_note(title: str, limit: int = 10, offset: int = 0):
+@app.get("/note/search/{title}", response_model=NotesResponseModel)
+async def search_note(title: str, limit: int = 9, page: int = 1):
     """
     Search for notes by title.
     """
     logging.info("Search note")
     db = get_db()
-    return list(
-        db.note.find({"title": {"$regex": title, "$options": "i"}})
-        .skip(offset)
-        .limit(limit)
-    )
+    response = list(db.note.aggregate([
+        {"$match": {"title": {"$regex": title, "$options": "i"}}},
+        {"$sort": {
+            "updated_at": -1,
+        }},
+        {
+            "$facet": {
+                "notes": [
+                    {"$skip": (limit * (page - 1))},
+                    {"$limit": limit},
+                ],
+                "count": [
+                    {"$count": "total"},
+                ],
+            }
+        }]))
+    if not response or len(response[0]["count"]) == 0:
+        return {
+            "notes": [],
+            "total": 0,
+        }
+    return {
+        "notes": response[0]["notes"],
+        "total": response[0]["count"][0]["total"],
+    }
 
 
 @app.get("/note/{id}", response_model=Note)
@@ -116,6 +169,7 @@ async def gotback_to_sha1(id: str, sha1: str):
     try:
         note.gotback_to_sha1(sha1)
     except Exception:
-        raise HTTPException(status_code=404, detail="SHA1 not found in note items")
+        raise HTTPException(
+            status_code=404, detail="SHA1 not found in note items")
     note.gotback_to_sha1(sha1)
     return note.save()

@@ -30,7 +30,7 @@ const NotePreview = ({ note }: { note: Note }) => {
   return (
     <div className={classes.container}>
       <div className={classes.title}>
-        <h4>{note.title}</h4>
+        <h4>{ellipsis(note.title, 28)}</h4>
         <div className={classes.icons}>
           <EditIcon
             onClick={goToNote}
@@ -45,7 +45,7 @@ const NotePreview = ({ note }: { note: Note }) => {
         </div>
       </div>
       <div className={classes.description} onClick={goToNote}>
-        {ellipsis(note.items[note.items.length - 1].content, 250)}
+        {ellipsis(note.items[note.items.length - 1].content, 210)}
       </div>
       <div className={classes.footer}>
         <div>

@@ -8,8 +8,8 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=password
       - MONGO_INITDB_DATABASE=AlloBrain
-
-
+    volumes:
+      - mongo_data:/data/db 
 
 
   mongo-express:
@@ -25,3 +25,25 @@ services:
       - ME_CONFIG_BASICAUTH_PASSWORD=adminpasswd
     depends_on:
       - mongodb
+
+  notes_backend:
+    build: ./backend
+    ports:
+      - "7000:7000"
+    environment:
+      - DB_CONNEXION_STRING=mongodb://admin:password@mongodb:27017
+      - DATABASE=AlloBrain
+    depends_on:
+      - mongodb
+
+  notes_frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - notes_backend
+
+
+volumes:
+  mongo_data:  
+    driver: local

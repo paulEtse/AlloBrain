@@ -2,11 +2,11 @@
 
 ## Database configuration
 Create mongo db 
-Update the config.json file with your connextion informations to the db
+Create .env file with your connextion informations to the db
 ```
 {
-"DB_CONNEXION_STRING": "mongodb+srv://username:password@mongodbserver.com",
-"DATABASE": "Database Name"
+  "DB_CONNEXION_STRING": "mongodb://admin:password@localhost:27017/",
+  "DATABASE": "AlloBrain"
 }
 ```
 
@@ -21,9 +21,9 @@ pip install -r requirements.txt
 
 ## Run
 ```
-uvicorn main:app --host 0.0.0.0 --port 7000 --workers 1 --reload
+uvicorn src.main:app --host 0.0.0.0 --port 7000 --workers 1 --reload
 ```
-API documentation  at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+API documentation  at [http://127.0.0.1:7000/docs](http://127.0.0.1:8000/docs)
 
 ## Lint
 To sort imports, format and lint files, run these commands:
@@ -36,7 +36,5 @@ flake8 .
 ## Tests 
 Launch tests
 ```
-pytest test
-
-https://pratheekms.hashnode.dev/test-your-fastapi-api-with-pytest
+pytest
 ```

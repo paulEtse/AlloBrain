@@ -1,16 +1,20 @@
-import json
 import logging
-import pathlib
 
+from dotenv import load_dotenv
 import pymongo
+import os
 
 
 logging.basicConfig(
     format="%(asctime)s: %(levelname)s: %(message)s", level=logging.INFO
 )
-ROOT = pathlib.Path(__file__).parent.parent
-with open(ROOT / "config.json", encoding="utf-8") as config_file:
-    conf = json.load(config_file)
+
+load_dotenv()
+
+conf = {
+    "DATABASE": os.environ.get("DATABASE"),
+    "DB_CONNEXION_STRING": os.environ.get("DB_CONNEXION_STRING"),
+}
 
 
 def get_db():

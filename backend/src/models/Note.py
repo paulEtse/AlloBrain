@@ -62,7 +62,7 @@ class Note(BaseModel):
             content=content,
             sha1=hashlib.sha1(content.encode()).hexdigest())
         self.items.append(note_entry)
-        self.updated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.updated_at = datetime.now()
 
     def gotback_to_sha1(self, sha1: str):
         """
@@ -76,7 +76,7 @@ class Note(BaseModel):
         for index, item in enumerate(self.items):
             if item.sha1 == sha1:
                 self.items = self.items[: index + 1]
-                self.updated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                self.updated_at = datetime.now()
                 return
         raise Exception("SHA1 not found in note items")
 
