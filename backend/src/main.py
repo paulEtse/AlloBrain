@@ -1,11 +1,11 @@
 import logging
 from datetime import datetime
+
 from bson import ObjectId
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 from .config import get_db
-
 from .models.Note import Note
 from .models.schemas import AddNote, NotesResponseModel, UpdateNote
 
@@ -33,22 +33,28 @@ async def get_note(limit: int = 9, page: int = 1):
     """
     logging.info("Get note")
     db = get_db()
-    response = list(db.note.aggregate([{
-        "$sort": {
-            "updated_at": -1,
-        }},
-        {
-
-            "$facet": {
-                "notes": [
-                    {"$skip": (limit * (page - 1))},
-                    {"$limit": limit},
-                ],
-                "count": [
-                    {"$count": "total"},
-                ],
-            }}
-    ]))
+    response = list(
+        db.note.aggregate(
+            [
+                {
+                    "$sort": {
+                        "updated_at": -1,
+                    }
+                },
+                {
+                    "$facet": {
+                        "notes": [
+                            {"$skip": (limit * (page - 1))},
+                            {"$limit": limit},
+                        ],
+                        "count": [
+                            {"$count": "total"},
+                        ],
+                    }
+                },
+            ]
+        )
+    )
     if not response or len(response[0]["count"]) == 0:
         return {
             "notes": [],
@@ -80,22 +86,29 @@ async def search_note(title: str, limit: int = 9, page: int = 1):
     """
     logging.info("Search note")
     db = get_db()
-    response = list(db.note.aggregate([
-        {"$match": {"title": {"$regex": title, "$options": "i"}}},
-        {"$sort": {
-            "updated_at": -1,
-        }},
-        {
-            "$facet": {
-                "notes": [
-                    {"$skip": (limit * (page - 1))},
-                    {"$limit": limit},
-                ],
-                "count": [
-                    {"$count": "total"},
-                ],
-            }
-        }]))
+    response = list(
+        db.note.aggregate(
+            [
+                {"$match": {"title": {"$regex": title, "$options": "i"}}},
+                {
+                    "$sort": {
+                        "updated_at": -1,
+                    }
+                },
+                {
+                    "$facet": {
+                        "notes": [
+                            {"$skip": (limit * (page - 1))},
+                            {"$limit": limit},
+                        ],
+                        "count": [
+                            {"$count": "total"},
+                        ],
+                    }
+                },
+            ]
+        )
+    )
     if not response or len(response[0]["count"]) == 0:
         return {
             "notes": [],
@@ -169,7 +182,6 @@ async def gotback_to_sha1(id: str, sha1: str):
     try:
         note.gotback_to_sha1(sha1)
     except Exception:
-        raise HTTPException(
-            status_code=404, detail="SHA1 not found in note items")
+        raise HTTPException(status_code=404, detail="SHA1 not found in note items")
     note.gotback_to_sha1(sha1)
     return note.save()

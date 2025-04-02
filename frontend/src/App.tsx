@@ -1,8 +1,8 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Route, Routes } from "react-router";
 import "./App.css";
-import NotePage from "./components/note/NotePage";
-import NotesPage from "./components/notes/NotesPage";
+import NotePage from "./pages/NotePage";
+import NotesPage from "./pages/notes/NotesPage";
 
 function App() {
   const queryClient = new QueryClient();

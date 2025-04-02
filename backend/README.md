@@ -1,8 +1,8 @@
 ## Dev environnment
 
 ## Database configuration
-Create mongo db 
-Create .env file with your connextion informations to the db
+Connect to mongo db 
+Create .env file with your connexion informations to the your mongo database
 ```
 {
   "DB_CONNEXION_STRING": "mongodb://admin:password@localhost:27017/",

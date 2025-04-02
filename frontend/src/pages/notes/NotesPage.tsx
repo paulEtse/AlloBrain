@@ -5,18 +5,19 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import fetchNotes from "../../api/fetchNotes";
 import { DEFAULT_PAGINATION_LIMIT } from "../../api/util";
-import AddNote from "../addNote/AddNote";
-import NotePreview from "../notePreview/NotePreview";
-import Loader from "../share/loader/Loader";
-import SearchBar from "../share/searchBar/SearchBar";
+import AddNote from "../../components/addNote/AddNote";
+import NotePreview from "../../components/notePreview/NotePreview";
+import Loader from "../../components/share/loader/Loader";
+import SearchBar from "../../components/share/searchBar/SearchBar";
 import classes from "./NotesPage.module.css";
+
 const NotesPage = () => {
   const [userSearch, setUserSearch] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
   const [openAddNoteModal, setOpenAddNoteModal] = useState(false);
   const page = Number(searchParams.get("page")) || 1;
   const {
-    data: notes,
+    data: notesPager,
     isLoading,
     refetch,
   } = useQuery({
@@ -40,11 +41,12 @@ const NotesPage = () => {
         <Loader />
       ) : (
         <>
-          {notes && (
+          {notesPager && (
             <>
               <div className={classes.notesHeaderContainer}>
                 <div>
-                  {notes?.notes?.length > 0 && `${notes.total} notes found`}
+                  {notesPager?.notes?.length > 0 &&
+                    `${notesPager.total} notes found`}
                 </div>
                 <div>
                   <Button
@@ -62,10 +64,10 @@ const NotesPage = () => {
                 </div>
               </div>
               <div className={classes.notesContainer}>
-                {notes.notes.map((note) => (
+                {notesPager.notes.map((note) => (
                   <NotePreview note={note} key={note._id} />
                 ))}
-                {notes?.notes?.length === 0 && (
+                {notesPager?.notes?.length === 0 && (
                   <div className={classes.noNotes}>
                     <p>
                       No notes found <br />
@@ -79,16 +81,13 @@ const NotesPage = () => {
         </>
       )}
 
-      {notes?.notes && (
+      {notesPager?.notes && (
         <div className={classes.pagination}>
           <Pagination
-            count={Math.ceil(notes.total / DEFAULT_PAGINATION_LIMIT)}
+            count={Math.ceil(notesPager.total / DEFAULT_PAGINATION_LIMIT)}
             page={page}
             onChange={(event, value) => {
-              console.log("Page changed to:", value);
               setSearchParams({ page: value.toString() });
-
-              refetch();
             }}
           />
         </div>

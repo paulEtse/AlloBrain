@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import deleteNote from "../../api/deleteNote";
 import { ellipsis } from "../../api/util";
-import Note from "../../model/Note";
+import Note from "../../models/Note";
 import ConfirmationModal from "../share/modal/confirmationModal/ConfirmationModal";
 import classes from "./NotePreview.module.css";
 

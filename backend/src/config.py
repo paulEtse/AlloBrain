@@ -1,9 +1,8 @@
 import logging
-
-from dotenv import load_dotenv
-import pymongo
 import os
 
+import pymongo
+from dotenv import load_dotenv
 
 logging.basicConfig(
     format="%(asctime)s: %(levelname)s: %(message)s", level=logging.INFO
@@ -21,7 +20,6 @@ def get_db():
     """
     Get the database connection.
     """
-    print("Using real db")
     CLIENT = pymongo.MongoClient(conf["DB_CONNEXION_STRING"])
     db = CLIENT[conf["DATABASE"]]
     return db

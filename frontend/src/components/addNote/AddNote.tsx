@@ -24,10 +24,7 @@ const AddNote = ({ open, setOpen }: AddNoteProps) => {
       await createNote(title, content);
     },
     onSuccess: () => {
-      console.log("Note created successfully");
       queryClient.invalidateQueries({ queryKey: ["notes"] });
-
-      // reload();
       setOpen(false);
     },
     onError: (error) => {

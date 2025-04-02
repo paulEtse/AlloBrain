@@ -1,4 +1,4 @@
-import Note from "../model/Note";
+import Note from "../models/Note";
 import { reviver } from "./util";
 
 const fetchNotes = async (
@@ -17,13 +17,11 @@ const fetchNotes = async (
   const response = await fetch(url, {
     method: "GET",
   });
-  console.log("Response:", response);
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
   const data = await response.text();
-  const res = JSON.parse(data, reviver);
-  return res;
+  return JSON.parse(data, reviver);
 };
 
 export default fetchNotes;

@@ -1,10 +1,11 @@
+import hashlib
 
 from fastapi.testclient import TestClient
 
-import hashlib
-
 from src.test.conftest import FIRST_TEST_NOTE
+
 from .. import main
+
 client = TestClient(main.app)
 
 
@@ -27,18 +28,15 @@ def test_get_note_by_id(mongo_mock):
     response = client.get("/note/67ebbe31e2a27ddd8b6b21ad")
     assert response.status_code == 200
     assert response.json()["title"] == FIRST_TEST_NOTE["title"]
-    assert response.json()[
-        "items"][0]["content"] == FIRST_TEST_NOTE["items"][0]["content"]
+    assert (
+        response.json()["items"][0]["content"] == FIRST_TEST_NOTE["items"][0]["content"]
+    )
     assert len(response.json()["items"]) == len(FIRST_TEST_NOTE["items"])
 
 
 def test_create_note(mongo_mock):
     response = client.post(
-        "/note",
-        json={
-            "title": "New Test Note",
-            "content": "This is a new test note."
-        }
+        "/note", json={"title": "New Test Note", "content": "This is a new test note."}
     )
     assert response.status_code == 200
     assert response.json()["title"] == "New Test Note"
@@ -59,15 +57,19 @@ def test_update_note(mongo_mock):
         "/note/67ebbe31e2a27ddd8b6b21ad",
         json={
             "content": "This is a test note. It has  been updated",
-        }
+        },
     )
     assert response.status_code == 200
     assert response.json()["title"] == "Test Note"
     assert response.json()["items"][0]["content"] == "This is a test note."
-    assert response.json()[
-        "items"][1]["content"] == "This is a test note. Add new features"
-    assert response.json()[
-        "items"][2]["content"] == "This is a test note. It has  been updated"
+    assert (
+        response.json()["items"][1]["content"]
+        == "This is a test note. Add new features"
+    )
+    assert (
+        response.json()["items"][2]["content"]
+        == "This is a test note. It has  been updated"
+    )
     assert len(response.json()["items"]) == 3
 
 
@@ -82,8 +84,7 @@ def test_delete_note(mongo_mock):
 def gotback_to_sha1(mongo_mock):
     entry = FIRST_TEST_NOTE["items"][0]
     firts_content_sha1 = hashlib.sha1(entry.content.encode()).hexdigest()
-    response = client.get(
-        f"/note/67ebbe31e2a27ddd8b6b21ad/{firts_content_sha1}")
+    response = client.get(f"/note/67ebbe31e2a27ddd8b6b21ad/{firts_content_sha1}")
     assert response.status_code == 200
     assert response.json()["items"][0]["content"] == entry.content
     assert len(response.json()["items"]) == 1

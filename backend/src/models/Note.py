@@ -1,27 +1,15 @@
+import hashlib
 from datetime import datetime
 from typing import Annotated, Optional
-import hashlib
-
 
 from bson import ObjectId
 from pydantic import BaseModel, BeforeValidator, Field
 
-import pymongo
-from ..config import conf
+from ..config import get_db
 
 from .NoteEntry import NoteEntry
 
 PyObjectId = Annotated[str, BeforeValidator(str)]
-
-
-def get_db():
-    """
-    Get the database connection.
-    """
-    print("Using real db")
-    CLIENT = pymongo.MongoClient(conf["DB_CONNEXION_STRING"])
-    db = CLIENT[conf["DATABASE"]]
-    return db
 
 
 class Note(BaseModel):
@@ -59,8 +47,8 @@ class Note(BaseModel):
         Add an item to the note.
         """
         note_entry = NoteEntry(
-            content=content,
-            sha1=hashlib.sha1(content.encode()).hexdigest())
+            content=content, sha1=hashlib.sha1(content.encode()).hexdigest()
+        )
         self.items.append(note_entry)
         self.updated_at = datetime.now()
 

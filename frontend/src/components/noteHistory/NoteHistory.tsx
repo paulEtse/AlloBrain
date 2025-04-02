@@ -4,8 +4,8 @@ import * as Diff from "diff";
 import { useState } from "react";
 import checkoutNote from "../../api/checkoutNote";
 import { ellipsis } from "../../api/util";
-import Note from "../../model/Note";
-import NoteEntry from "../../model/NoteEntry";
+import Note from "../../models/Note";
+import NoteEntry from "../../models/NoteEntry";
 import ConfirmationModal from "../share/modal/confirmationModal/ConfirmationModal";
 import classes from "./NoteHistory.module.css";
 
@@ -70,10 +70,7 @@ const NoteHistory = ({ note, item, previousItem }: NoteHistoryProps) => {
         <ConfirmationModal
           title={`Checkout to version : ${ellipsis(item.content, 20)}`}
           description="Are you sure you want to checkout to this version? This will overwrite your current note content and cannot be undone."
-          onConfirm={() => {
-            console.log("Checkout confirmed");
-            mutate();
-          }}
+          onConfirm={mutate}
           confirmBtn="Checkout"
           cancelBtn="Cancel"
           open={openConfirmationModal}

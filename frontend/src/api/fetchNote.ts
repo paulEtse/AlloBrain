@@ -1,4 +1,4 @@
-import Note from "../model/Note";
+import Note from "../models/Note";
 import { reviver } from "./util";
 
 const fetchNote = async (noteId: string): Promise<Note> => {
@@ -9,11 +9,7 @@ const fetchNote = async (noteId: string): Promise<Note> => {
     throw new Error("Network response was not ok");
   }
   const data = await response.text();
-  console.log({ data });
-  const res = JSON.parse(data, reviver);
-  console.log({ res });
-
-  return res;
+  return JSON.parse(data, reviver);
 };
 
 export default fetchNote;

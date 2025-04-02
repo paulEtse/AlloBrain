@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
-import fetchNote from "../../api/fetchNote";
-import { ellipsis } from "../../api/util";
-import NoteHistory from "../noteHistory/NoteHistory";
-import Loader from "../share/loader/Loader";
-import Navigation from "../share/navigation/Navigation";
-import EditNote from "./editNote/EditNote";
+import fetchNote from "../api/fetchNote";
+import { ellipsis } from "../api/util";
+import EditNote from "../components/note/editNote/EditNote";
+import NoteHistory from "../components/noteHistory/NoteHistory";
+import Loader from "../components/share/loader/Loader";
+import Navigation from "../components/share/navigation/Navigation";
 
 const NotePage = () => {
   const { id: noteId } = useParams();

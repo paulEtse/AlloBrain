@@ -1,9 +1,9 @@
 # AlloBrain Application - Docker Setup
+https://alloreview.notion.site/experienced-fullstack-dev-technical-test
 
 ## Overview
-This document provides a guide on how to set up and run the note application using Docker. The application consists of:
+This document provides a guide on how to set up and run the note application. The application use :
 - **MongoDB**: The primary database
-- **Mongo Express**: A web-based MongoDB admin interface
 - **FastAPI Backend**: Handles API requests and connects to MongoDB
 - **React Frontend**: The user interface for the application
 
@@ -11,6 +11,8 @@ This document provides a guide on how to set up and run the note application usi
 Ensure you have the following installed:
 - [Docker](https://www.docker.com/get-started)
 - [Docker Compose](https://docs.docker.com/compose/install/)
+
+You can also run the app without docker. Then you'll need a mongo database to store data. Launch the frontend and backend by following instructions in their README files.
 
 ## Setup and Installation
 
@@ -25,9 +27,6 @@ To start all services, run:
 ```sh
 docker-compose up -d --build
 ```
-
-
-## Conclusion
 Your application should now be up and running! 🎉
 - **Frontend**: [http://localhost:5173](http://localhost:5173)
 - **Backend API**: [http://localhost:7000](http://localhost:7000)
@@ -36,23 +35,5 @@ Your application should now be up and running! 🎉
 The swagger of backend is accessible via [http://localhost:7000/docs](http://localhost:7000/docs)
 
 
-## Services Breakdown
-
-- MongoDB (Database) **Port**: `27017`
-- Mongo Express (Database Admin UI) **Port**:`8081`
-- Notes Backend (FastAPI) **Port**: `7000`
-- Notes Frontend (React + Vite) **Port**: `5173`
-
-## Stopping and Restarting
-To stop all containers:
-```sh
-docker-compose down
-```
-
-To restart:
-```sh
-docker-compose up -d
-```
-
-## Further infomation 
-For more detail read the README file of the frontend and the backend
+## Further infomation
+For more details look at README files of the frontend and the backend
