@@ -1,0 +1,42 @@
+.container {
+  padding: 20px;
+}
+
+.formItem {
+  width: 100%;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.textarea {
+  width: 100%;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: black;
+  width: 100%;
+  height: 200px;
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+  color: black;
+}
+
+.actions {
+  display: flex;
+  gap: 20px;
+  justify-content: right;
+  align-items: right;
+}
+
+@media screen and (max-width: 768px) {
+  .formContainer {
+    width: 90vw;
+    height: 80vh;
+  }
+}

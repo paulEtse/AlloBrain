@@ -1,0 +1,43 @@
+.bgGreen {
+  background-color: #d1fae5;
+  color: black;
+}
+
+.bgRed {
+  background-color: #fee2e2;
+  color: black;
+}
+
+.date {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.container {
+  border: 1px solid #e5e7eb;
+  border-radius: 0px 10px 10px 0;
+  border-left: 5px solid #5b6779;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
+}
+
+.hitoryItem {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.sha1 {
+  background-color: gray;
+  color: white;
+  width: 90%;
+  margin-top: 30px;
+  margin: 0 5% 20px 5%;
+}
+.checkoutButton {
+  font-weight: bold;
+}

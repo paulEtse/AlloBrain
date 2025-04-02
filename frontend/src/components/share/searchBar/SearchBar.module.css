@@ -1,0 +1,13 @@
+.input {
+  width: 500px;
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+}
+
+@media screen and (max-width: 768px) {
+  .input {
+    width: 100%;
+    padding: 10px;
+  }
+}
