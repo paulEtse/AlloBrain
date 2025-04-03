@@ -15,7 +15,7 @@ services:
   mongo-express:
     image: mongo-express
     ports:
-      - "${ME_PORT}:${ME_PORT}"
+      - "${ME_PORT}:8081"
     environment:
       - ME_CONFIG_MONGODB_URL=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:${MONGO_PORT}
       - ME_CONFIG_BASICAUTH_USERNAME=${ME_USERNAME}
