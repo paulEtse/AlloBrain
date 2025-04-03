@@ -35,7 +35,7 @@ const NotesPage = () => {
 
   return (
     <div>
-      <SearchBar setValue={setUserSearch} />
+      <SearchBar value={userSearch} setValue={setUserSearch} />
 
       {isLoading ? (
         <Loader />

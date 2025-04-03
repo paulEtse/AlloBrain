@@ -16,7 +16,7 @@ interface NoteHistoryProps {
 }
 
 const NoteHistory = ({ note, item, previousItem }: NoteHistoryProps) => {
-  const parts = Diff.diffChars(previousItem?.content || "", item.content);
+  const parts = Diff.diffWords(previousItem?.content || "", item.content);
   const [isHovered, setIsHovered] = useState(false);
   const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
   const queryClient = useQueryClient();

@@ -18,11 +18,23 @@
   border-radius: 10px 10px 0 0;
 }
 
-.description {
+.ellipsis {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
   padding: 10px;
-  cursor: pointer;
-  flex-grow: 1;
+  height: 140px;
+  line-height: 30px;
+  width: calc(100% - 20px);
   word-wrap: break-word;
+  white-space: pre-wrap;
+  text-align: left;
+}
+
+.description {
+  cursor: pointer;
 }
 
 .icons {
@@ -38,11 +50,11 @@
 }
 
 .editIcon:hover {
-  color: blue;
+  color: #42a5f5;
 }
 
 .deleteIcon:hover {
-  color: red;
+  color: #f44336;
 }
 
 .footer {

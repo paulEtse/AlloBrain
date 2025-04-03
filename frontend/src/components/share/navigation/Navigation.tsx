@@ -5,7 +5,6 @@ import { NavLink } from "react-router";
 type NavigationProps = { name: string; link: string }[];
 
 const Navigation = ({ parts }: { parts: NavigationProps }) => {
-  console.log({ parts });
   const lastPart = parts[parts.length - 1];
   if (!lastPart) {
     return null;

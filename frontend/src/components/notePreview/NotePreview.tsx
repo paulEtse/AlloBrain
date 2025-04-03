@@ -44,8 +44,11 @@ const NotePreview = ({ note }: { note: Note }) => {
           />
         </div>
       </div>
-      <div className={classes.description} onClick={goToNote}>
-        {ellipsis(note.items[note.items.length - 1].content, 210)}
+      <div
+        className={clsx(classes.ellipsis, classes.description)}
+        onClick={goToNote}
+      >
+        {note.items[note.items.length - 1].content}
       </div>
       <div className={classes.footer}>
         <div>
