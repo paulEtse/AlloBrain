@@ -12,6 +12,10 @@
   font-size: 0.875rem;
   color: #6b7280;
 }
+.historyContent {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
 
 .container {
   border: 1px solid #e5e7eb;

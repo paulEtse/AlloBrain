@@ -33,7 +33,7 @@ const NoteHistory = ({ note, item, previousItem }: NoteHistoryProps) => {
       <h1 className={classes.date}>
         {item.created_at.toLocaleString().slice(0, -3)}
       </h1>
-      <div>
+      <div className={classes.historyContent}>
         {parts.map((part, index) => {
           const className = part.added
             ? classes.bgGreen
