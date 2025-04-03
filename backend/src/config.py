@@ -10,16 +10,11 @@ logging.basicConfig(
 
 load_dotenv()
 
-conf = {
-    "DATABASE": os.environ.get("DATABASE"),
-    "DB_CONNEXION_STRING": os.environ.get("DB_CONNEXION_STRING"),
-}
-
 
 def get_db():
     """
     Get the database connection.
     """
-    CLIENT = pymongo.MongoClient(conf["DB_CONNEXION_STRING"])
-    db = CLIENT[conf["DATABASE"]]
+    CLIENT = pymongo.MongoClient(os.environ.get("DB_CONNEXION_STRING"))
+    db = CLIENT[os.environ.get("DATABASE")]
     return db

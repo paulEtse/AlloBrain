@@ -12,7 +12,7 @@ Ensure you have the following installed:
 - [Docker](https://www.docker.com/get-started)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
-You can also run the app without docker. Then you'll need a mongo database to store data. Launch the frontend and backend by following instructions in their README files.
+You can also run the app without docker. Then, you'll need a mongo database to store data. Launch the frontend and backend by following instructions in their README files.
 
 ## Setup and Installation
 
@@ -30,14 +30,12 @@ docker-compose up -d --build
 Your application should now be up and running! 🎉
 - **Frontend**: [http://localhost:7173](http://localhost:7173)
 - **Backend API**: [http://localhost:6173](http://localhost:6173)
-- **Mongo Express**: [http://localhost:8081](http://localhost:8081)
+- **Mongo Express**: [http://localhost:9173](http://localhost:9173)
 
 The swagger of backend is accessible via [http://localhost:6173/docs](http://localhost:6173/docs)
 
-### 4. Trouble shoot port problems
-If you having problems using a particular port, you can change it. 
-Match correctly port values in .env file, Dockerfile and docker-compose.yml file
-
+### 4. Troubleshoot port problems
+If you having problems using a particular port, you can change it .env file in the root folder of the project.
 
 ## Further infomation
 For more details look at README files of the frontend and the backend

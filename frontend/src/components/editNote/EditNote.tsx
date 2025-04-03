@@ -3,8 +3,8 @@ import SaveIcon from "@mui/icons-material/Save";
 import { Button } from "@mui/material";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import updateNote from "../../../api/updateNote";
-import Note from "../../../models/Note";
+import updateNote from "../../api/updateNote";
+import Note from "../../models/Note";
 import classes from "./EditNote.module.css";
 
 const EditNote = ({ note }: { note: Note }) => {

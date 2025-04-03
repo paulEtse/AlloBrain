@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
 import fetchNote from "../../api/fetchNote";
 import { ellipsis } from "../../api/util";
-import EditNote from "../../components/note/editNote/EditNote";
+import EditNote from "../../components/editNote/EditNote";
 import NoteHistory from "../../components/noteHistory/NoteHistory";
-import Loader from "../../components/share/loader/Loader";
-import Navigation from "../../components/share/navigation/Navigation";
+import Loader from "../../components/shared/loader/Loader";
+import Navigation from "../../components/shared/navigation/Navigation";
 import classes from "./NotePage.module.css";
 
 const NotePage = () => {

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 import deleteNote from "../../api/deleteNote";
 import { ellipsis } from "../../api/util";
 import Note from "../../models/Note";
-import ConfirmationModal from "../share/modal/confirmationModal/ConfirmationModal";
+import ConfirmationModal from "../shared/modal/confirmationModal/ConfirmationModal";
 import classes from "./NotePreview.module.css";
 
 const NotePreview = ({ note }: { note: Note }) => {

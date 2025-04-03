@@ -7,8 +7,8 @@ import fetchNotes from "../../api/fetchNotes";
 import { DEFAULT_PAGINATION_LIMIT } from "../../api/util";
 import AddNote from "../../components/addNote/AddNote";
 import NotePreview from "../../components/notePreview/NotePreview";
-import Loader from "../../components/share/loader/Loader";
-import SearchBar from "../../components/share/searchBar/SearchBar";
+import Loader from "../../components/shared/loader/Loader";
+import SearchBar from "../../components/shared/searchBar/SearchBar";
 import classes from "./NotesPage.module.css";
 
 const NotesPage = () => {

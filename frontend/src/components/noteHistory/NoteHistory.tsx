@@ -6,7 +6,7 @@ import checkoutNote from "../../api/checkoutNote";
 import { ellipsis } from "../../api/util";
 import Note from "../../models/Note";
 import NoteEntry from "../../models/NoteEntry";
-import ConfirmationModal from "../share/modal/confirmationModal/ConfirmationModal";
+import ConfirmationModal from "../shared/modal/confirmationModal/ConfirmationModal";
 import classes from "./NoteHistory.module.css";
 
 interface NoteHistoryProps {
