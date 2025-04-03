@@ -21,7 +21,7 @@
   border: 1px solid #e5e7eb;
   border-radius: 0px 10px 10px 0;
   border-left: 5px solid #5b6779;
-  margin: 20px;
+  margin: 20px 0;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -38,9 +38,11 @@
 .sha1 {
   background-color: gray;
   color: white;
-  width: 90%;
   margin-top: 30px;
   margin: 0 5% 20px 5%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .checkoutButton {
   font-weight: bold;

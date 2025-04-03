@@ -2,44 +2,45 @@ version: "3"
 services:
   mongodb:
     image: mongo
+    command: mongod --port ${MONGO_PORT}
     ports:
-      - "27017:27017"
+      - "${MONGO_PORT}:${MONGO_PORT}"
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=password
-      - MONGO_INITDB_DATABASE=AlloBrain
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+      - MONGO_INITDB_DATABASE=${MONGO_DATABASE}
     volumes:
       - mongo_data:/data/db 
-
 
   mongo-express:
     image: mongo-express
     ports:
-      - "8081:8081"
+      - "${ME_PORT}:${ME_PORT}"
     environment:
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
-      - ME_CONFIG_MONGODB_SERVER=mongodb
-      - ME_CONFIG_MONGODB_PORT=27017
-      - ME_CONFIG_BASICAUTH_USERNAME=adminuser
-      - ME_CONFIG_BASICAUTH_PASSWORD=adminpasswd
+      - ME_CONFIG_MONGODB_URL=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:${MONGO_PORT}
+      - ME_CONFIG_BASICAUTH_USERNAME=${ME_USERNAME}
+      - ME_CONFIG_BASICAUTH_PASSWORD=${ME_PASSWORD}
     depends_on:
       - mongodb
 
   notes_backend:
     build: ./backend
     ports:
-      - "6173:6173"
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
     environment:
-      - DB_CONNEXION_STRING=mongodb://admin:password@mongodb:27017
-      - DATABASE=AlloBrain
+      - DB_CONNEXION_STRING=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:${MONGO_PORT}
+      - DATABASE=${MONGO_DATABASE}
+    command: ["uvicorn", "src.main:app", "--port", "${BACKEND_PORT}", "--host", "0.0.0.0"] 
     depends_on:
       - mongodb
 
   notes_frontend:
     build: ./frontend
     ports:
-      - "7173:7173"
+      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
+    environment:    
+      - VITE_BACKEND_URL=http://127.0.0.1:${BACKEND_PORT}
+    command: ["npm", "run", "dev", "--", "--host", "--port", "${FRONTEND_PORT}"]
     depends_on:
       - notes_backend
 

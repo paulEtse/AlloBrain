@@ -1,15 +1,28 @@
-## Launch the app
 
-### Install dependencies
+# Frontend Setup
+
+## 1️⃣ Install Dependencies
+
+Install all required dependencies using npm:
+
 ```sh
-npm i
+npm install
 ```
 
-### Run
-- Update backend URL in .env file
+## 2️⃣ Configure Backend URL
+
+- Open the `.env` file and update the `VITE_BACKEND_URL` with the correct backend URL (e.g., `http://localhost:6173` or your configured backend address):
+
+```env
+VITE_BACKEND_URL=http://localhost:6173
+```
+
+## 3️⃣ Run the Development Server
+
+Start the development server:
+
 ```sh
 npm run dev
 ```
 
-The app must be running at
-[http://localhost:7173/](http://localhost:7173/)
+The application will be available at [http://localhost:7173/](http://localhost:7173/).
