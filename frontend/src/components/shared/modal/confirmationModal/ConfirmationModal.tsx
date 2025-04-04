@@ -36,7 +36,10 @@ export default function ConfirmationModal({
     >
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <DialogContent>
-        <DialogContentText id="alert-dialog-description">
+        <DialogContentText
+          id="alert-dialog-description"
+          style={{ wordBreak: "break-word" }}
+        >
           {description}
         </DialogContentText>
       </DialogContent>
