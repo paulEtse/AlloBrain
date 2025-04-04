@@ -1,6 +1,6 @@
 # Experienced FullStack Developer @ AlloBrain - Test Technique
 
-Download from https://alloreview.notion.site/experienced-fullstack-dev-technical-test
+Downloaded from https://alloreview.notion.site/experienced-fullstack-dev-technical-test
 
 ## Objectif
 
