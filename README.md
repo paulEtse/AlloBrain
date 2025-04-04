@@ -35,7 +35,6 @@ Your application should now be up and running! 🎉
 
 The swagger of backend is accessible via [http://localhost:6173/docs](http://localhost:6173/docs)
 
-### 4. Troubleshoot port problems
 To stop all services, run:
 ```sh
 docker-compose down
