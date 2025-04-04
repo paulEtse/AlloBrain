@@ -30,6 +30,7 @@ services:
     environment:
       - DB_CONNEXION_STRING=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:${MONGO_PORT}
       - DATABASE=${MONGO_DATABASE}
+      - TZ=Europe/Paris
     command: ["uvicorn", "src.main:app", "--port", "${BACKEND_PORT}", "--host", "0.0.0.0"] 
     depends_on:
       - mongodb
