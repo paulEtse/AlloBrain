@@ -16,9 +16,7 @@ const SearchBar = ({ value, setValue }: SearcheBarProps) => {
   }, 500);
 
   useEffect(() => {
-    if (intputValue !== "") {
-      debounced(intputValue);
-    }
+    debounced(intputValue);
   }, [intputValue]);
 
   return (
@@ -29,7 +27,7 @@ const SearchBar = ({ value, setValue }: SearcheBarProps) => {
         disableUnderline
         value={intputValue}
         onChange={(e) => {
-          setInputValue(e.target.value.trim());
+          setInputValue(e.target.value);
         }}
         endAdornment={
           <InputAdornment position="end">
