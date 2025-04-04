@@ -1,6 +1,16 @@
 
 # Frontend Setup
 
+## ⚙️ Prerequisites
+
+Make sure you have the following installed before proceeding:
+
+- **Node.js** (version 16 or later recommended)  
+  [Download Node.js](https://nodejs.org/)
+- **npm** (comes with Node.js)
+- Access to the backend API (running locally or remotely)
+- A `.env` file in the root directory (see step 2)
+
 ## 1️⃣ Install Dependencies
 
 Install all required dependencies using npm:
