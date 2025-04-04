@@ -1,5 +1,6 @@
 # AlloBrain Application - Docker Setup
-https://alloreview.notion.site/experienced-fullstack-dev-technical-test
+
+See the specification in SPEC.md
 
 ## Overview
 This document provides a guide on how to set up and run the note application. The application use :
