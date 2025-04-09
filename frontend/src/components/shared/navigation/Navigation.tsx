@@ -12,12 +12,9 @@ const Navigation = ({ parts }: { parts: NavigationProps }) => {
   return (
     <>
       {parts.slice(0, -1).map((part) => (
-        <>
-          <NavLink key={part.link} to={part.link}>
-            {part.name}
-          </NavLink>{" "}
-          /{" "}
-        </>
+        <span key={part.link}>
+          <NavLink to={part.link}>{part.name}</NavLink> /{" "}
+        </span>
       ))}
       <span className="text-gray-500"> {lastPart.name}</span>
     </>

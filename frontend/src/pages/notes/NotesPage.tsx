@@ -24,6 +24,7 @@ const NotesPage = () => {
     queryKey: ["notes", userSearch, page],
     queryFn: () => fetchNotes(userSearch, page),
   });
+
   useEffect(() => {
     refetch();
     // remove page param from url
@@ -31,6 +32,7 @@ const NotesPage = () => {
       searchParams.delete("page");
       setSearchParams(searchParams);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userSearch]);
 
   return (

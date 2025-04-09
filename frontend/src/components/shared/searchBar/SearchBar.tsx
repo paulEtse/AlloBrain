@@ -17,7 +17,7 @@ const SearchBar = ({ value, setValue }: SearcheBarProps) => {
 
   useEffect(() => {
     debounced(intputValue);
-  }, [intputValue]);
+  }, [debounced, intputValue]);
 
   return (
     <div>

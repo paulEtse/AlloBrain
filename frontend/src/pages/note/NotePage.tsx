@@ -44,15 +44,14 @@ const NotePage = () => {
       <h1>Historical changes</h1>
 
       {reverseItems.map((item, index) => (
-        <>
+        <span key={item.sha1 + item.created_at.toString()}>
           <NoteHistory
             note={note}
             item={item}
             previousItem={reverseItems[index + 1] || undefined}
-            key={item.sha1 + item.created_at.toString()}
           />
-          <h2 className={classes.date}> * </h2>
-        </>
+          <h2> * </h2>
+        </span>
       ))}
     </div>
   );
